@@ -1,0 +1,60 @@
+{
+  "name": "svelte-number-format",
+  "version": "1.0.0",
+  "description": "Svelte component to format number in an input or as a text.",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "scripts": {
+    "build": "rollup -c",
+    "prepublish:public": "npm run build",
+    "publish:public": "npm publish --access public",
+    "format": "prettier --write .",
+    "lint": "npm run lint:es && npm run lint:ts",
+    "lint:es": "eslint . --ext ts --ext tsx --ext js",
+    "lint:ts": "tsc --noemit",
+    "test:unit": "true",
+    "prepare": "husky install"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pitis/svelte-number-format.git"
+  },
+  "keywords": [
+    "svelte-component",
+    "svelte",
+    "currency",
+    "input",
+    "number",
+    "number-format",
+    "mask"
+  ],
+  "author": "Pitis Radu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pitis/svelte-number-format/issues"
+  },
+  "homepage": "https://github.com/pitis/svelte-number-format#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-typescript": "^7.16.7",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
+    "prettier": "^2.5.1",
+    "rollup": "^2.63.0",
+    "svelte": "^3.46.1",
+    "ts-node": "^10.4.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.4"
+  },
+  "peerDependencies": {
+    "svelte": "^3.4.1"
+  }
+}
