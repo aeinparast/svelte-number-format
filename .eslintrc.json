@@ -1,0 +1,46 @@
+{
+    "settings": {
+      "svelte3/typescript": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2019,
+      "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint", "svelte3"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
+    ],
+    "env": {
+      "es6": true,
+      "browser": true,
+      "jest": true,
+      "node": true,
+      "webextensions": true
+    },
+    "overrides": [
+      {
+        "files": ["*.svelte"],
+        "processor": "svelte3/svelte3"
+      }
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": 0,
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/explicit-member-accessibility": 0,
+      "@typescript-eslint/indent": 0,
+      "@typescript-eslint/member-delimiter-style": 0,
+      "@typescript-eslint/no-explicit-any": 0,
+      "@typescript-eslint/no-var-requires": 0,
+      "@typescript-eslint/no-use-before-define": 0,
+      "@typescript-eslint/no-unused-vars": [
+        2,
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ],
+      "no-console": 1
+    }
+  }
