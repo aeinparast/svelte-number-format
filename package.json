@@ -1,73 +1,41 @@
 {
   "name": "svelte-number-format",
-  "version": "1.0.0",
-  "description": "Svelte component to format number in an input or as a text.",
-  "svelte": "src/index.js",
-  "module": "dist/index.mjs",
-  "main": "dist/index.js",
+  "version": "0.0.1",
   "scripts": {
-    "prebuild": "rm -rf ./dist",
-    "build": "rollup -c",
-    "prepublish:public": "npm run build",
-    "publish:public": "npm publish --access public",
-    "format": "prettier --write .",
-    "lint": "npm run lint:es && npm run lint:ts",
-    "lint:es": "eslint . --ext ts --ext tsx --ext js",
-    "lint:ts": "tsc --noemit",
-    "test:unit": "true",
-    "validate": "svelte-check",
-    "prepare": "husky install"
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "package": "svelte-kit package",
+    "preview": "svelte-kit preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "test:unit": "jest"
   },
-  "files": [
-    "src",
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pitis/svelte-number-format.git"
-  },
-  "keywords": [
-    "svelte-component",
-    "svelte",
-    "currency",
-    "input",
-    "number",
-    "number-format",
-    "mask"
-  ],
-  "author": "Pitis Radu",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pitis/svelte-number-format/issues"
-  },
-  "homepage": "https://github.com/pitis/svelte-number-format#readme",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^21.0.1",
-    "@rollup/plugin-node-resolve": "^13.1.3",
-    "@rollup/plugin-typescript": "^6.0.0",
-    "@tsconfig/svelte": "^1.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.9.1",
-    "@typescript-eslint/parser": "^5.9.1",
+    "@babel/preset-env": "^7.16.8",
+    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/kit": "next",
+    "@testing-library/dom": "^8.11.2",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/svelte": "^3.0.3",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "babel-jest": "^27.4.6",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "fs-extra": "^9.0.1",
-    "glob": "^7.1.6",
-    "husky": "^7.0.4",
-    "prettier": "^2.5.1",
-    "rollup": "^2.63.0",
-    "rollup-plugin-execute": "^1.1.1",
-    "rollup-plugin-filesize": "^9.0.2",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-svelte": "^7.1.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.21.0",
-    "svelte": "^3.46.1",
-    "svelte-check": "^1.0.60",
-    "svelte-preprocess": "^4.10.1",
-    "ts-node": "^10.4.0",
-    "tslib": "^2.0.3",
-    "typescript": "^4.0.3"
+    "eslint-plugin-svelte3": "^3.2.1",
+    "jest": "^27.4.7",
+    "prettier": "^2.4.1",
+    "prettier-plugin-svelte": "^2.4.0",
+    "svelte": "^3.44.0",
+    "svelte-check": "^2.2.6",
+    "svelte-jester": "^2.1.5",
+    "svelte-preprocess": "^4.9.4",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3"
   },
-  "peerDependencies": {
-    "svelte": "^3.4.1"
-  }
+  "type": "module"
 }
