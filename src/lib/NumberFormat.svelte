@@ -1,29 +1,25 @@
 <script lang="ts">
+  import { imask, MaskedInput } from 'svelte-imask'
+
   export let placeholder = ''
   export let displayType = 'input'
   export let value: string | number = null
   export let type = 'text'
   export let prefix = ''
+  export let mask: string | null = null
+  const formattedValue = `${prefix} ${value}`
 
-  let formattedValue = `${prefix} ${value}`
-
-  function getCurrentCaretPosition(el: HTMLInputElement) {
-    /*Max of selectionStart and selectionEnd is taken for the patch of pixel and other mobile device caret bug*/
-    return Math.max(el.selectionStart, el.selectionEnd)
+  const options = {
+    mask,
   }
+
+  $: if (prefix && mask) mask = `${prefix} ${mask}`
 </script>
 
 {#if displayType === 'input'}
-  <input
-    {type}
-    {placeholder}
-    value={formattedValue}
-    on:keydown={(e) => {
-      console.log(getCurrentCaretPosition(e.target))
-    }}
-  />
+  <MaskedInput bind:value {options} {type} {placeholder} />
 {/if}
 
 {#if displayType === 'text'}
-  <span>{value}</span>
+  <span use:imask={{ mask }}>{formattedValue}</span>
 {/if}
