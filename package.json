@@ -1,6 +1,26 @@
 {
   "name": "svelte-number-format",
-  "version": "0.0.1",
+  "description": "Svelte component to format number in an input or as a text.",
+  "version": "0.0.2",
+  "author": "Pitis Radu",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pitis/svelte-number-format"
+  },
+  "bugs": {
+    "url": "https://github.com/pitis/svelte-number-format/issues"
+  },
+  "keywords": [
+    "svelte-component",
+    "svelte",
+    "currency",
+    "input",
+    "number",
+    "number-format",
+    "mask"
+  ],
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
@@ -38,6 +58,5 @@
     "svelte2tsx": "^0.5.6",
     "tslib": "^2.3.1",
     "typescript": "^4.6.2"
-  },
-  "type": "module"
+  }
 }
