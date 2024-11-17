@@ -1,25 +1,54 @@
 <script lang="ts">
-  import { imask, MaskedInput } from 'svelte-imask'
+	import { onMount } from 'svelte'
 
-  export let placeholder = ''
-  export let displayType = 'input'
-  export let value: string | number = null
-  export let type = 'text'
-  export let prefix = ''
-  export let mask: string | null = null
-  const formattedValue = `${prefix} ${value}`
+	export let value: number | string = '' // The bound value
+	export let format: string = '' // Custom format, e.g., "#,###.##"
+	export let mask: string = '' // Optional mask, e.g., "(###) ###-####"
+	export let decimalSeparator: string = '.' // Decimal separator
+	export let thousandSeparator: string = ',' // Thousand separator
+	export let onInput: (formattedValue: string, rawValue: string) => void = () => {}
 
-  const options = {
-    mask,
-  }
+	let inputElement: HTMLInputElement
 
-  $: if (prefix && mask) mask = `${prefix} ${mask}`
+	// Format the input value based on the given format/mask
+	const formatValue = (rawValue: string): string => {
+		if (mask) {
+			// Apply mask logic
+			let masked = ''
+			let maskIndex = 0
+			for (let i = 0; i < rawValue.length && maskIndex < mask.length; i++) {
+				if (mask[maskIndex] === '#') {
+					masked += rawValue[i]
+					maskIndex++
+				} else {
+					masked += mask[maskIndex]
+					maskIndex++
+					i-- // Retry this character with the next mask segment
+				}
+			}
+			return masked
+		}
+
+		// Format number according to separators
+		if (format) {
+			const [integerPart, fractionalPart] = rawValue.split(decimalSeparator)
+			const formattedInt = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator)
+			return fractionalPart ? `${formattedInt}${decimalSeparator}${fractionalPart}` : formattedInt
+		}
+
+		return rawValue
+	}
+
+	const handleInput = (event: Event) => {
+		const rawValue = (event.target as HTMLInputElement).value.replace(/[^0-9.]/g, '')
+		const formattedValue = formatValue(rawValue)
+		onInput(formattedValue, rawValue)
+		inputElement.value = formattedValue
+	}
+
+	onMount(() => {
+		inputElement.value = formatValue(value.toString())
+	})
 </script>
 
-{#if displayType === 'input'}
-  <MaskedInput bind:value {options} {type} {placeholder} />
-{/if}
-
-{#if displayType === 'text'}
-  <span use:imask={{ mask }}>{formattedValue}</span>
-{/if}
+<input bind:this={inputElement} on:input={handleInput} />

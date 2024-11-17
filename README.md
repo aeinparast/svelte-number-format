@@ -1,6 +1,6 @@
 # svelte-number-format
 
-Number input component with prefixes and masks for [Svelte 3](https://svelte.dev).
+Svelte Number Format is a custom input component for [Svelte 5](https://svelte.dev). It ensures that a user can only enter text that meets specific numeric or string patterns, and formats the input value for display.
 
 ## Usage
 
@@ -12,27 +12,39 @@ npm install --save svelte-number-format
 
 ## Props
 
-- `value` - the value of the input
-- `placeholder` - the placeholder of the input (optional)
-- `displayType` - can be `text` or `input` (by default: `input`)
-- `prefix` - set characters before the input (optional)
-- `mask` - the mask of the input, (example: "+{7}(000)000-00-00") (optional)
+| **Prop**            | **Type**                                   | **Description**                                                       |
+| ------------------- | ------------------------------------------ | --------------------------------------------------------------------- |
+| `value`             | `string \| number`                         | Initial value to display.                                             |
+| `format`            | `string`                                   | Custom number format (e.g., `#,###.##`).                              |
+| `mask`              | `string`                                   | Input mask (e.g., `"(###) ###-####"`).                                |
+| `decimalSeparator`  | `string`                                   | Character for the decimal separator (default: `.`).                   |
+| `thousandSeparator` | `string`                                   | Character for the thousand separator (default: `,`).                  |
+| `onInput`           | `(formatted: string, raw: string) => void` | Callback function invoked with the formatted and raw values on input. |
 
 ## Example
 
-```html
-<script lang="ts">
-  import NumberFormat from 'svelte-number-format'
-  let inputValue = ''
+```js
+<script>
+	import NumberFormat from 'svelte-number-format'
 
-  $: console.log(inputValue)
+	let formattedValue = ''
+	let rawValue = ''
 </script>
 
 <NumberFormat
-  mask="+{7}(000)000-00-00"
-  bind:value="{inputValue}"
-  displayType="input"
+	value={1234567.89}
+	format="#,###.##"
+	decimalSeparator="."
+	thousandSeparator=","
+	onInput={(formatted, raw) => {
+		formattedValue = formatted
+		rawValue = raw
+	}}
 />
+
+<p>Formatted: {formattedValue}</p>
+<p>Raw: {rawValue}</p>
+
 ```
 
 ## License
