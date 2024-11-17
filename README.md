@@ -25,7 +25,7 @@ npm install --save svelte-number-format
 
 ```js
 <script>
-	import NumberFormat from 'svelte-number-format'
+	import { NumberFormat } from 'svelte-number-format'
 
 	let formattedValue = ''
 	let rawValue = ''
