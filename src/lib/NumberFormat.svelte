@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
 
   export let value: number | string = '' // The bound value
+  export let classList: string = ''
   export let format: string = '' // Custom format, e.g., "#,###.##"
   export let mask: string = '' // Optional mask, e.g., "(###) ###-####"
   export let decimalSeparator: string = '.' // Decimal separator
@@ -62,4 +63,4 @@
   })
 </script>
 
-<input bind:this={inputElement} on:input={handleInput} />
+<input class={classList} bind:this={inputElement} on:input={handleInput} />
